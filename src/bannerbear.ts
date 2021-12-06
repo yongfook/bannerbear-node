@@ -1,25 +1,25 @@
+import { Headers } from "node-fetch";
 import Api from "./api";
 
-const API_ENDPOINT = "https://api.bannerbear.com";
+const API_ENDPOINT = "https://api.bannerbear.com/v2";
 const API_ENDPOINT_SYNCHRONOUS = "https://syncapi.bannerbear.com/v2"
 
-interface CreateImageParams { modifications: any[], webhook_url: string, transparent: boolean, render_pdf: boolean, metadata: any }
+interface CreateImageParams { modifications: any[], webhook_url: string | null, transparent?: boolean, render_pdf?: boolean, metadata: string | null }
 
 export default class Bannerbear {
-  private apiToken: string;
   private api;
   private syncApi;
 
   constructor(apiToken: string) {
-    this.apiToken = apiToken || String(process.env['BANNERBEAR_API_KEY']);
-    this.api = new Api([
-      ['Content-Type', 'application/json'],
-      ['Authorization', `Bearer ${apiToken}`]
-    ], API_ENDPOINT);
-    this.syncApi = new Api([
-      ['Content-Type', 'application/json'],
-      ['Authorization', `Bearer ${apiToken}`]
-    ], API_ENDPOINT_SYNCHRONOUS);
+    const token = apiToken || String(process.env['BANNERBEAR_API_KEY']);
+    this.api = new Api(new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }), API_ENDPOINT);
+    this.syncApi = new Api(new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }), API_ENDPOINT_SYNCHRONOUS);
   }
 
 
@@ -57,4 +57,9 @@ export default class Bannerbear {
 
     return this.api.post('/images', { ...params, template: uid })
   }
+
+  // =================================
+  //            VIDEOS
+  // =================================
+
 }

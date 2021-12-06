@@ -1,12 +1,14 @@
+import fetch, { Headers } from 'node-fetch';
+
 export default class Api {
   headers: Headers;
   baseUrl: string;
-  constructor(defaultHeaders: Array<string[]>, url: string) {
-    this.headers = new Headers(defaultHeaders);
+  constructor(defaultHeaders: Headers, url: string) {
+    this.headers = defaultHeaders;
     this.baseUrl = url;
   }
 
-  public async get(url: string): Promise<Response> {
+  public async get(url: string): Promise<unknown> {
     try {
       const response = await fetch(`${this.baseUrl}${url}`, {method: 'GET', headers: this.headers });
       if (!response.ok) {
@@ -19,10 +21,9 @@ export default class Api {
   }
   }
 
-  public async patch(url: string, params = {}): Promise<Response> {
+  public async patch(url: string, params = {}): Promise<unknown> {
     try {
-      const body = new URLSearchParams(params).toString();
-      const response = await fetch(`${this.baseUrl}${url}`, { method: 'PATCH', body, headers: this.headers });
+      const response = await fetch(`${this.baseUrl}${url}`, { method: 'PATCH', body: JSON.stringify(params), headers: this.headers });
       if (!response.ok) {
           throw new Error("HTTP error " + response.status);
       }
@@ -33,10 +34,9 @@ export default class Api {
     }
   }
 
-  public async post(url: string, params = {}): Promise<Response> {
+  public async post(url: string, params = {}): Promise<unknown> {
     try {
-      const body = new URLSearchParams(params).toString();
-      const response = await fetch(`${this.baseUrl}${url}`, { method: 'POST', body, headers: this.headers });
+      const response = await fetch(`${this.baseUrl}${url}`, { method: 'POST', body: JSON.stringify(params), headers: this.headers });
       if (!response.ok) {
           throw new Error("HTTP error " + response.status);
       }
