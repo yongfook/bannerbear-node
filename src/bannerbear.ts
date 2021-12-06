@@ -4,10 +4,10 @@ import base64url from 'base64url';
 import Api from "./api";
 
 const API_ENDPOINT = "https://api.bannerbear.com/v2";
-const API_ENDPOINT_SYNCHRONOUS = "https://syncapi.bannerbear.com/v2"
+const API_ENDPOINT_SYNCHRONOUS = "https://sync.api.bannerbear.com/v2"
 
-interface CreateImageParams { modifications: any[], webhook_url?: string | null, transparent?: boolean, render_pdf?: boolean, metadata: string | null }
-interface CreateVideoParams { input_media_url: string, modifications: any[], blur?: number, trim_to_length_in_seconds?: number, webhook_url?: string, metadata: string | null, frames?: any[], frame_duration?: any[], create_gif_preview?: boolean }
+interface CreateImageParams { modifications: any[], webhook_url?: string | null, transparent?: boolean, render_pdf?: boolean, metadata?: string | null }
+interface CreateVideoParams { input_media_url: string, modifications: any[], blur?: number, trim_to_length_in_seconds?: number, webhook_url?: string, metadata?: string | null, frames?: any[], frame_duration?: any[], create_gif_preview?: boolean }
 interface UpdateVideoParams { transcription?: string[], approved?: boolean }
 
 interface UpdateTemplateParams { name?: string, tags?: string[], metadata?: any[]}
@@ -21,6 +21,27 @@ interface CreateAnimatedGifParams { frames: any[], input_media_url?: string }
 interface CreateMovieParams { width: number, height: number, inputs: any[], transition?: string, soundtrack_url?: string, webhook_url?: string, metadata?: string}
 
 interface ListTemplateParams { tag?: string, name?: string, page?: number, limit?: number,}
+
+export interface ImageResponse {
+  created_at: string;
+  status: string; // 'pending' or 'completed'
+  self: string;
+  uid: string;
+  image_url: string;
+  image_url_png: string;
+  image_url_jpg: string;
+  template: string;
+  modifications: any[];
+  webhook_url: string | null;
+  webhook_response_code: string | null;
+  transparent: boolean;
+  metadata: any[] | null;
+  template_name: string;
+  width: number;
+  height: number;
+  render_pdf: boolean;
+  pdf_url: string | null;
+}
 
 export default class Bannerbear {
   private api;
@@ -56,23 +77,24 @@ export default class Bannerbear {
   //            IMAGES
   // =================================
 
-  public async get_image(uid: string) {
-    return this.api.get(`/images/${uid}`)
+  public async get_image(uid: string): Promise<ImageResponse> {
+    return this.api.get(`/images/${uid}`) as Promise<ImageResponse>
   }
 
-  public async list_images(page?: number, limit?: number) {
+
+  public async list_images(page?: number, limit?: number): Promise<ImageResponse[]> {
     let queryString = [];
     if (page) queryString.push(`page=${page}`)
     if (limit) queryString.push(`limit=${limit}`)
-    return this.api.get(`/images${queryString.length > 0 ? `?` + queryString.join('&') : '' }`)
+    return this.api.get(`/images${queryString.length > 0 ? `?` + queryString.join('&') : '' }`) as Promise<ImageResponse[]>
   }
 
-  public async create_image(uid: string, params: CreateImageParams, synchronous: boolean = false) {
+  public async create_image(uid: string, params: CreateImageParams, synchronous: boolean = false): Promise<ImageResponse> {
     if (synchronous) {
-      return this.syncApi.post('/images', { ...params, template: uid })
+      return this.syncApi.post('/images', { ...params, template: uid }) as Promise<ImageResponse>
     }
 
-    return this.api.post('/images', { ...params, template: uid })
+    return this.api.post('/images', { ...params, template: uid }) as Promise<ImageResponse>
   }
 
   // =================================
