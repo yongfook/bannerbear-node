@@ -187,7 +187,7 @@ export default class Bannerbear {
 
 
   public async account(): Promise<Account> {
-    return this.api.get('/action') as Promise<Account>
+    return this.api.get('/account') as Promise<Account>
   }
 
   public async fonts(): Promise<Font> {
