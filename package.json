@@ -1,6 +1,6 @@
 {
   "name": "bannerbear",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Bannerbear API Wrapper",
   "main": "/lib/bannerbear.js",
   "types": "/lib/bannerbear.d.ts",
