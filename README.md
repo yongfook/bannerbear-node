@@ -105,6 +105,15 @@ const images = await bb.create_image(
 );
 ```
 
+##### Options
+
+- `modifications`: an array of [modifications](https://developers.bannerbear.com/#post-v2-images) you would like to make (`array`)
+- `webhook_url`: a webhook url to post the final image object to (`string`)
+- `transparent`: render image with a transparent background (`boolean`)
+- `synchronous`: generate the image synchronously (`boolean`)
+- `render_pdf`: render a PDF in addition to an image (`boolean`)
+- `metadata`: include any metadata to reference at a later point (`string`)
+
 #### Get an Image
 
 ```ts

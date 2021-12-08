@@ -187,7 +187,7 @@ export default class Bannerbear {
 
 
   public async account(): Promise<Account> {
-    return this.api.get('/action') as Promise<Account>
+    return this.api.get('/account') as Promise<Account>
   }
 
   public async fonts(): Promise<Font> {
@@ -300,7 +300,7 @@ export default class Bannerbear {
   }
 
   public async create_animated_gif(uid: string, params: CreateAnimatedGifParams): Promise<AnimatedGif> {
-    return this.api.post(`/animated_gif`, { ...params, template: uid }) as Promise<AnimatedGif>
+    return this.api.post(`/animated_gifs`, { ...params, template: uid }) as Promise<AnimatedGif>
   }
 
   // =================================
