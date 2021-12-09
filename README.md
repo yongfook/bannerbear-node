@@ -22,6 +22,17 @@ yarn add bannerbear
 
 ## Usage
 
+### Import
+In Javascript
+```js
+const Bannerbear = require('bannerbear')
+```
+
+And in typescript
+```ts
+import Bannerbear from 'bannerbear';
+```
+
 ### Authentication
 
 instantiate
