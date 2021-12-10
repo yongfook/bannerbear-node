@@ -168,7 +168,7 @@ export interface Account {
   current_project: any;
 }
 
-export default class Bannerbear {
+export class Bannerbear {
   private api;
   private syncApi;
   private token: string;
@@ -381,3 +381,5 @@ export default class Bannerbear {
     return `${base}${query}&s=${signature}`
   }
 }
+
+export default Bannerbear;
