@@ -8,7 +8,7 @@ Find the full API documentation [here](https://developers.bannerbear.com/)
 
 ## Requirements
 
-Node 12 or higher.
+Node 14 or higher.
 
 ## Installation
 
@@ -25,7 +25,7 @@ yarn add bannerbear
 ### Import
 In Javascript
 ```js
-const Bannerbear = require('bannerbear')
+const { Bannerbear } = require('bannerbear')
 ```
 
 And in typescript
