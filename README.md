@@ -22,6 +22,22 @@ yarn add bannerbear
 
 ## Usage
 
+### Table of Contents
+
+- [Import](#import)
+- [Authentication](#authentication)
+- [Account Info](#account-info)
+- [Images](#images)
+- [Videos](#videos)
+- [Collections](#collections)
+- [Animated Gifs](#animated-gifs)
+- [Movies](#movies)
+- [Screenshots](#screenshots)
+- [Templates](#templates)
+- [Template Sets](#template-sets)
+- [Video Templates](#video-templates)
+- [Signed URLs](#signed-urls)
+
 ### Import
 In Javascript
 ```js
