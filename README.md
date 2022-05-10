@@ -382,22 +382,20 @@ await bb.list_video_templates(2);
 This gem also includes a convenient utility for generating signed urls. Authenticate as above, then:
 
 ```ts
-await bb.generate_signed_url("base uid", { modifications: [] });
+await bb.generate_signed_url("base uid", []);
 
 // example
-await bb.generate_signed_url("A89wavQyY3Bebk3djP", {
-  modifications: [
-    {
-      name: "country",
-      text: "testing!",
-    },
-    {
-      name: "photo",
-      image_url:
-        "https://images.unsplash.com/photo-1638356435991-4c79b00ebef3?w=764&q=80",
-    },
-  ],
-});
+await bb.generate_signed_url("A89wavQyY3Bebk3djP", [
+  {
+    name: "country",
+    text: "testing!",
+  },
+  {
+    name: "photo",
+    image_url:
+      "https://images.unsplash.com/photo-1638356435991-4c79b00ebef3?w=764&q=80",
+  },
+]);
 // => https://ondemand.bannerbear.com/signedurl/A89wavQyY3Bebk3djP/image.jpg?modifications=W3sibmFtZSI6ImNvdW50cnkiLCJ0ZXh0IjoidGVzdGluZyEifSx7Im5hbWUiOiJwaG90byIsImltYWdlX3VybCI6Imh0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNjM4MzU2NDM1OTkxLTRjNzliMDBlYmVmMz93PTc2NCZxPTgwIn1d&s=40e7c9d4902b86ea83e0c400e57d7cc580534fd527e234d40a0c7ace589a16eb
 ```
 
