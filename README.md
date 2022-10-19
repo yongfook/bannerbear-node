@@ -39,12 +39,12 @@ yarn add bannerbear
 - [Signed URLs](#signed-urls)
 
 ### Import
-In Javascript
+In the backend (Node)
 ```js
 const { Bannerbear } = require('bannerbear')
 ```
 
-And in typescript
+And in the frontend (TypeScript)
 ```ts
 import Bannerbear from 'bannerbear';
 ```
