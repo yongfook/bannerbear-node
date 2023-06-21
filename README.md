@@ -51,7 +51,6 @@ import Bannerbear from 'bannerbear';
 
 ### Authentication
 
-instantiate
 Get the API key for your project in Bannerbear and then instantiate a new client.
 
 ```ts
